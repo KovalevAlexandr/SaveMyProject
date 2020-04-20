@@ -14,14 +14,10 @@ import java.util.ArrayList;
 
 public class Fight extends AppCompatActivity {
 
-    TextView tv1;
-    TextView tv2;
-    Button atk;
-    Button def;
+    TextView tv1, tv2;
+    Button atk, skill, def;
 
-    Character hero;
-
-    Character tmpHero;
+    Character hero, tmpHero;
 
     Enemy enemy;
 
@@ -44,29 +40,30 @@ public class Fight extends AppCompatActivity {
         tv1 = findViewById(R.id.tv1);
         tv2 = findViewById(R.id.tv2);
         atk = findViewById(R.id.atk);
+        skill = findViewById(R.id.skill);
         def = findViewById(R.id.def);
 
-        Generator generator = new Generator(MainActivity.getStage(),MainActivity.getLevel());
+        Generator generator = new Generator(MainActivity.getStage(), MainActivity.getLevel());
 
         hero = (Character) getIntent().getSerializableExtra("hero_get");
 
-        if ((int)(Math.random() * 10) < 3) {
+        if ((int) (Math.random() * 10) < 3) {
             itemWin = generator.itemForFightGenerator(hero.getHeroItems());
         }
 
         enemy = (Enemy) new Generator(MainActivity.getStage(), MainActivity.getLevel()).enemyGenerator();
 
-        tmpHero = new Character(hero.getHp(),hero.getMaxHp(),hero.getAtk(),hero.getDef(),hero.getName(),
-                hero.getExp(),hero.getMoney(),hero.getLvl(),hero.getImpPoint(),hero.getHeroItems(),
+        tmpHero = new Character(hero.getHp(), hero.getMaxHp(), hero.getAtk(), hero.getDef(), hero.getName(),
+                hero.getExp(), hero.getMoney(), hero.getLvl(), hero.getImpPoint(), hero.getHeroItems(),
                 hero.getSkills());
 
-        tmpHero.setAll(new Treatment.Fight(tmpHero,hero.getHeroItems(),enemy).setFightIndicator());
+        tmpHero.setAll(new Treatment.Fight(tmpHero, hero.getHeroItems(), enemy).setFightIndicator());
 
         if (tmpHero.getHp() > tmpHero.getMaxHp()) {
             tmpHero.setHp(tmpHero.getMaxHp());
         }
 
-        fight = new Treatment.Fight(tmpHero,hero.getHeroItems(),enemy);
+        fight = new Treatment.Fight(tmpHero, hero.getHeroItems(), enemy);
 
         tv1.setText(enemy.getName() + " " + enemy.getHp());
         tv2.setText("Ваше здоровье: " + tmpHero.getHp() + "/" + tmpHero.getMaxHp() + "\n\n" +
@@ -76,6 +73,7 @@ public class Fight extends AppCompatActivity {
         ButtonTreatment bt = new ButtonTreatment();
 
         atk.setOnClickListener(bt);
+        skill.setOnClickListener(bt);
         def.setOnClickListener(bt);
 
     }
@@ -87,9 +85,11 @@ public class Fight extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.atk:
                     enemy.setHp(fight.basAttack());
+                    tmpHero.setSkills(fight.skillsUpdateStep(""));
 
                     if (enemy.getHp() <= 0) {
                         hero.setHp(tmpHero.getHp());
+                        hero.setSkills(fight.setSkillsAfterFight());
                         hero.setAll(Treatment.battleWin(hero, MainActivity.getStage(), MainActivity.getLevel()));
                         Intent i = new Intent(Fight.this, Locate.class);
                         if (itemWin != null) {
@@ -122,9 +122,55 @@ public class Fight extends AppCompatActivity {
                     }
                     break;
 
+                case R.id.skill:
+                    if (fight.skillIsReady("skill_atk")) {
+                        enemy.setHp(fight.secondAttack());
+                        tmpHero.setSkills(fight.skillsUpdateStep("skill_atk"));
+                        tmpHero.setSkills(fight.setSkillStep("skill_atk"));
+                        if (enemy.getHp() <= 0) {
+                            hero.setHp(tmpHero.getHp());
+                            hero.setSkills(fight.setSkillsAfterFight());
+                            hero.setAll(Treatment.battleWin(hero, MainActivity.getStage(), MainActivity.getLevel()));
+                            Intent i = new Intent(Fight.this, Locate.class);
+                            if (itemWin != null) {
+                                ArrayList<Item> hi = hero.getHeroItems();
+                                hi.add(itemWin);
+                                hero.setHeroItems(hi);
+                            }
+                            i.putExtra("hero_get", hero);
+                            startActivity(i);
+                            tv1.setText(enemy.getName() + " " + enemy.getHp());
+                            finish();
+                            return;
+                        }
+
+                        tv1.setText(enemy.getName() + " " + enemy.getHp());
+
+                        dmg = Math.max(enemy.getAtk() - tmpHero.getDef(), 0);
+                        tmpHero.setHp(tmpHero.getHp() - dmg);
+
+                        tv2.setText("Ваше здоровье: " + tmpHero.getHp() + "/" + tmpHero.getMaxHp() + "\n\n" +
+                                "защита: " + tmpHero.getDef() + " атака: " + tmpHero.getAtk() + " опыт: " +
+                                tmpHero.getExp() + " уровень: " + tmpHero.getLvl());
+
+                        if (tmpHero.getHp() <= 0) {
+                            MainActivity.setLevel(null);
+                            Toast.makeText(getApplicationContext(), "Вы проиграли", Toast.LENGTH_SHORT).show();
+                            Intent i = new Intent(Fight.this, MainActivity.class);
+                            startActivity(i);
+                            finish();
+                        }
+                        break;
+                    } else {
+                        Toast.makeText(Fight.this, "Навык не готов", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+
+
                 case R.id.def:
                     dmg = Math.max(enemy.getAtk() - tmpHero.getDef() * 3, 0);
                     tmpHero.setHp(tmpHero.getHp() - dmg);
+                    tmpHero.setSkills(fight.skillsUpdateStep(""));
 
                     tv2.setText("Ваше здоровье: " + tmpHero.getHp() + "/" + tmpHero.getMaxHp() + "\n\n" +
                             "защита: " + tmpHero.getDef() + " атака: " + tmpHero.getAtk() + " опыт: " +

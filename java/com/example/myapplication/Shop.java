@@ -57,33 +57,33 @@ public class Shop extends AppCompatActivity {
 
         items = generator.itemForShopGenerator(hero.getHeroItems());
 
-        shop_back =(Button) findViewById(R.id.shop_back);
+        shop_back = findViewById(R.id.shop_back);
 
-        shop_money = (TextView) findViewById(R.id.shop_money);
+        shop_money = findViewById(R.id.shop_money);
 
-        top_shop_button_1 = (Button) findViewById(R.id.top_shop_button_1);
-        top_shop_button_2 = (Button) findViewById(R.id.top_shop_button_2);
-        top_shop_button_3 = (Button) findViewById(R.id.top_shop_button_3);
+        top_shop_button_1 = findViewById(R.id.top_shop_button_1);
+        top_shop_button_2 = findViewById(R.id.top_shop_button_2);
+        top_shop_button_3 = findViewById(R.id.top_shop_button_3);
 
-        bottom_shop_button_1 = (Button) findViewById(R.id.bottom_shop_button_1);
-        bottom_shop_button_2 = (Button) findViewById(R.id.bottom_shop_button_2);
-        bottom_shop_button_3 = (Button) findViewById(R.id.bottom_shop_button_3);
+        bottom_shop_button_1 = findViewById(R.id.bottom_shop_button_1);
+        bottom_shop_button_2 = findViewById(R.id.bottom_shop_button_2);
+        bottom_shop_button_3 = findViewById(R.id.bottom_shop_button_3);
 
-        quality_item_top_1 = (TextView) findViewById(R.id.quality_item_top_1);
-        quality_item_top_2 = (TextView) findViewById(R.id.quality_item_top_2);
-        quality_item_top_3 = (TextView) findViewById(R.id.quality_item_top_3);
+        quality_item_top_1 = findViewById(R.id.quality_item_top_1);
+        quality_item_top_2 = findViewById(R.id.quality_item_top_2);
+        quality_item_top_3 = findViewById(R.id.quality_item_top_3);
 
-        quality_item_bottom_1 = (TextView) findViewById(R.id.quality_item_bottom_1);
-        quality_item_bottom_2 = (TextView) findViewById(R.id.quality_item_bottom_2);
-        quality_item_bottom_3 = (TextView) findViewById(R.id.quality_item_bottom_3);
+        quality_item_bottom_1 = findViewById(R.id.quality_item_bottom_1);
+        quality_item_bottom_2 = findViewById(R.id.quality_item_bottom_2);
+        quality_item_bottom_3 = findViewById(R.id.quality_item_bottom_3);
 
-        price_item_top_1 = (TextView) findViewById(R.id.price_item_top_1);
-        price_item_top_2 = (TextView) findViewById(R.id.price_item_top_2);
-        price_item_top_3 = (TextView) findViewById(R.id.price_item_top_3);
+        price_item_top_1 = findViewById(R.id.price_item_top_1);
+        price_item_top_2 = findViewById(R.id.price_item_top_2);
+        price_item_top_3 = findViewById(R.id.price_item_top_3);
 
-        price_item_bottom_1 = (TextView) findViewById(R.id.price_item_bottom_1);
-        price_item_bottom_2 = (TextView) findViewById(R.id.price_item_bottom_2);
-        price_item_bottom_3 = (TextView) findViewById(R.id.price_item_bottom_3);
+        price_item_bottom_1 = findViewById(R.id.price_item_bottom_1);
+        price_item_bottom_2 = findViewById(R.id.price_item_bottom_2);
+        price_item_bottom_3 = findViewById(R.id.price_item_bottom_3);
 
         top_shop_button_1.setText(generator.infoAboutItemInShop(items.get(0)).split("\\.")[0]);
         top_shop_button_2.setText(generator.infoAboutItemInShop(items.get(1)).split("\\.")[0]);

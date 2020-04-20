@@ -56,10 +56,10 @@ public class ImproveHero extends AppCompatActivity {
         improve_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                improve_info.setText("Увеличивает атаку на 10%");
                 if (hero.getImpPoint() >= 1) {
-                    hero.setAtk((int) (hero.getAtk() * 1.25));
                     ArrayList<Skill> hs = hero.getSkills();
-                    skill = new Skill("sss", true);
+                    skill = new Skill("1.atk_up", true);
                     hs.add(skill);
                     hero.setSkills(hs);
                     hero.setImpPoint(hero.getImpPoint() - 1);
@@ -74,26 +74,28 @@ public class ImproveHero extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 for (int i = 0; i < hero.getSkills().size(); i++) {
-                    if (hero.getSkills().get(i).getSkill().equals("sss")) {
+                    if (hero.getSkills().get(i).getSkill().equals("1.atk_up")) {
                         flag = true;
+                        break;
                     }
                 }
                 if (hero.getImpPoint() >= 1) {
                     if (flag) {
-                        hero.setDef((int) (hero.getDef() * 1.25));
                         ArrayList<Skill> hs = hero.getSkills();
-                        skill = new Skill("ttt", true);
+                        skill = new Skill("2.skill_atk.0.2", true);
                         hs.add(skill);
                         hero.setSkills(hs);
                         hero.setImpPoint(hero.getImpPoint() - 1);
                         flag = false;
                     } else {
                         Toast.makeText(ImproveHero.this, "Выучите предыдуий" +
-                                "навык", Toast.LENGTH_SHORT).show();
+                                " навык", Toast.LENGTH_SHORT).show();
+                        flag = false;
                     }
                 } else {
                     Toast.makeText(ImproveHero.this, "Недостаточно" +
                             " очков", Toast.LENGTH_SHORT).show();
+                    flag = false;
                 }
             }
         });
