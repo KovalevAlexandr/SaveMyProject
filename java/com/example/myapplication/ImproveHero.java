@@ -23,6 +23,8 @@ public class ImproveHero extends AppCompatActivity {
 
     Skill skill;
 
+    Integer cost;
+
     Character hero;
 
     boolean flag;
@@ -43,61 +45,77 @@ public class ImproveHero extends AppCompatActivity {
         improve_info = findViewById(R.id.improve_info);
         improve_button = findViewById(R.id.improve_button);
 
-        back_improve_hero.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(ImproveHero.this, Locate.class);
-                i.putExtra("hero_get", hero);
-                startActivity(i);
-                finish();
-            }
-        });
+        ButtonTreatment bt = new ButtonTreatment();
 
-        improve_1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                improve_info.setText("Увеличивает атаку на 10%");
-                if (hero.getImpPoint() >= 1) {
-                    ArrayList<Skill> hs = hero.getSkills();
-                    skill = new Skill("1.atk_up", true);
-                    hs.add(skill);
-                    hero.setSkills(hs);
-                    hero.setImpPoint(hero.getImpPoint() - 1);
-                } else {
-                    Toast.makeText(ImproveHero.this, "Недостаточно" +
-                            " очков", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        back_improve_hero.setOnClickListener(bt);
+        improve_button.setOnClickListener(bt);
+        improve_1.setOnClickListener(bt);
+        improve_2.setOnClickListener(bt);
+    }
 
-        improve_2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for (int i = 0; i < hero.getSkills().size(); i++) {
-                    if (hero.getSkills().get(i).getSkill().equals("1.atk_up")) {
-                        flag = true;
-                        break;
+    private class ButtonTreatment implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.back_improve_hero:
+                    Intent intent = new Intent(ImproveHero.this, Locate.class);
+                    intent.putExtra("hero_get", hero);
+                    startActivity(intent);
+                    finish();
+                    break;
+
+                case R.id.improve_button:
+                    if (skill != null) {
+                        for (int i = 0; i < hero.getSkills().size(); i++) {
+                            if (hero.getSkills().get(i).getSkill().equals(skill.getSkill())) {
+                                Toast.makeText(ImproveHero.this, "Навык уже" +
+                                        " изучен", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+                        }
+                        if (hero.getImpPoint() >= cost) {
+                            hero.setImpPoint(hero.getImpPoint() - cost);
+                            ArrayList<Skill> hs = hero.getSkills();
+                            hs.add(skill);
+                            hero.setSkills(hs);
+                        } else {
+                            Toast.makeText(ImproveHero.this, "Недостаточно" +
+                                    " очков", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(ImproveHero.this, "Выберете" +
+                                " навык", Toast.LENGTH_SHORT).show();
                     }
-                }
-                if (hero.getImpPoint() >= 1) {
+                    break;
+
+                case R.id.improve_1:
+                    improve_info.setText("Увеличивает атаку на 10%");
+                    cost = 1;
+                    skill = new Skill("1.atk_up", true);
+                    break;
+
+                case R.id.improve_2:
+                    for (int i = 0; i < hero.getSkills().size(); i++) {
+                        if (hero.getSkills().get(i).getSkill().equals("1.atk_up")) {
+                            flag = true;
+                            break;
+                        }
+                    }
                     if (flag) {
-                        ArrayList<Skill> hs = hero.getSkills();
                         skill = new Skill("2.skill_atk.0.2", true);
-                        hs.add(skill);
-                        hero.setSkills(hs);
-                        hero.setImpPoint(hero.getImpPoint() - 1);
+                        cost = 0;
                         flag = false;
                     } else {
                         Toast.makeText(ImproveHero.this, "Выучите предыдуий" +
                                 " навык", Toast.LENGTH_SHORT).show();
                         flag = false;
                     }
-                } else {
-                    Toast.makeText(ImproveHero.this, "Недостаточно" +
-                            " очков", Toast.LENGTH_SHORT).show();
-                    flag = false;
-                }
+
+                    break;
+
             }
-        });
+        }
     }
+
 }

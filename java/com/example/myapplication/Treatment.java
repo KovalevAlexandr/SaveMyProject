@@ -91,11 +91,13 @@ public class Treatment {
             ArrayList<Skill> skills = hero.getSkills();
             for (int i = 0; i < skills.size(); i++) {
                 String info = skills.get(i).getSkill();
-                if (info.split("\\.")[1].equals(target)) {
-                    int up = Integer.parseInt(info.split("\\.")[3]);
-                    skills.get(i).setSkill(info.split("\\.")[0]
-                            + "." + info.split("\\.")[1] + "." +
-                            up + "." + info.split("\\.")[3]);
+                if (!info.split("\\.")[0].equals("1")) {
+                    if (info.split("\\.")[1].equals(target)) {
+                        int up = Integer.parseInt(info.split("\\.")[3]);
+                        skills.get(i).setSkill(info.split("\\.")[0]
+                                + "." + info.split("\\.")[1] + "." +
+                                up + "." + info.split("\\.")[3]);
+                    }
                 }
             }
             return skills;
@@ -105,13 +107,15 @@ public class Treatment {
             ArrayList<Skill> skills = hero.getSkills();
             for (int i = 0; i < skills.size(); i++) {
                 String info = skills.get(i).getSkill();
-                if (!info.split("\\.")[1].equals(target)) {
-                    int step = Integer.parseInt(info.split("\\.")[2]);
-                    if (step > 0) {
-                        step--;
-                        skills.get(i).setSkill(info.split("\\.")[0]
-                                + "." + info.split("\\.")[1] + "." +
-                                step + "." + info.split("\\.")[3]);
+                if (!info.split("\\.")[0].equals("1")) {
+                    if (!info.split("\\.")[1].equals(target)) {
+                        int step = Integer.parseInt(info.split("\\.")[2]);
+                        if (step > 0) {
+                            step--;
+                            skills.get(i).setSkill(info.split("\\.")[0]
+                                    + "." + info.split("\\.")[1] + "." +
+                                    step + "." + info.split("\\.")[3]);
+                        }
                     }
                 }
             }
@@ -122,9 +126,11 @@ public class Treatment {
             ArrayList<Skill> skills = hero.getSkills();
             for (int i = 0; i < skills.size(); i++) {
                 String info = skills.get(i).getSkill();
-                skills.get(i).setSkill(info.split("\\.")[0]
-                        + "." + info.split("\\.")[1] + "." +
-                        0 + "." + info.split("\\.")[3]);
+                if (!info.split("\\.")[0].equals("1")) {
+                    skills.get(i).setSkill(info.split("\\.")[0]
+                            + "." + info.split("\\.")[1] + "." +
+                            0 + "." + info.split("\\.")[3]);
+                }
             }
             return skills;
         }
