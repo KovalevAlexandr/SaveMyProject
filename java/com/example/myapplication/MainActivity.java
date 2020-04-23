@@ -30,13 +30,14 @@ public class MainActivity extends AppCompatActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
-        start = (Button) findViewById(R.id.start);
-        exit = (Button) findViewById(R.id.exit);
+        start = findViewById(R.id.start);
+        exit = findViewById(R.id.exit);
 
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                start.setEnabled(false);
                 Intent i = new Intent(MainActivity.this, SelectCharacter.class);
                 startActivity(i);
                 finish();
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                exit.setEnabled(false);
                 finish();
                 System.exit(0);
             }

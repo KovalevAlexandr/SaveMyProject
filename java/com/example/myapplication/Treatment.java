@@ -57,10 +57,21 @@ public class Treatment {
         public Character setFightIndicator() {
 
             for (int i = 0; i < hero.getSkills().size(); i++) {
-                if (hero.getSkills().get(i).getSkill().split("\\.")[0].equals("1")) {
-                    if (hero.getSkills().get(i).getSkill().split("\\.")[1].equals("atk_up")
-                            && hero.getSkills().get(i).isFlag()) {
-                        hero.setAtk((int) (hero.getAtk() * 1.1));
+                Skill heroPasSkill = hero.getSkills().get(i);
+                if (heroPasSkill.getSkill().split("\\.")[0].equals("1")) {
+                    if (heroPasSkill.isFlag()) {
+                        if (heroPasSkill.getSkill().split("\\.")[1].equals("phs_up")) {
+                            if (heroPasSkill.getLevel() == 1) {
+                                hero.setAtk((int) (hero.getAtk() * 1.1));
+                            } else if (heroPasSkill.getLevel() == 2) {
+                                hero.setAtk((int) (hero.getAtk() * 1.15));
+                                hero.setMaxHp((int) (hero.getMaxHp() * 1.2));
+                            } else {
+                                hero.setAtk((int) (hero.getAtk() * 1.2));
+                                hero.setMaxHp((int) (hero.getMaxHp() * 1.3));
+                                hero.setDef((int) (hero.getDef() * 1.1));
+                            }
+                        }
                     }
                 }
             }
@@ -78,8 +89,7 @@ public class Treatment {
             for (int i = 0; i < hero.getSkills().size(); i++) {
                 String eMod = hero.getSkills().get(i).getSkill();
                 if (eMod.split("\\.")[1].equals(mod)) {
-                    int step = Integer.parseInt(eMod.split("\\.")[2]);
-                    if (step == 0) {
+                    if (hero.getSkills().get(i).getNeedStep() == 0) {
                         flag = true;
                     }
                 }
@@ -93,10 +103,7 @@ public class Treatment {
                 String info = skills.get(i).getSkill();
                 if (!info.split("\\.")[0].equals("1")) {
                     if (info.split("\\.")[1].equals(target)) {
-                        int up = Integer.parseInt(info.split("\\.")[3]);
-                        skills.get(i).setSkill(info.split("\\.")[0]
-                                + "." + info.split("\\.")[1] + "." +
-                                up + "." + info.split("\\.")[3]);
+                        skills.get(i).setNeedStep(skills.get(i).getStep());
                     }
                 }
             }
@@ -109,12 +116,8 @@ public class Treatment {
                 String info = skills.get(i).getSkill();
                 if (!info.split("\\.")[0].equals("1")) {
                     if (!info.split("\\.")[1].equals(target)) {
-                        int step = Integer.parseInt(info.split("\\.")[2]);
-                        if (step > 0) {
-                            step--;
-                            skills.get(i).setSkill(info.split("\\.")[0]
-                                    + "." + info.split("\\.")[1] + "." +
-                                    step + "." + info.split("\\.")[3]);
+                        if (skills.get(i).getNeedStep() > 0) {
+                            skills.get(i).setNeedStep(skills.get(i).getNeedStep() - 1);
                         }
                     }
                 }
@@ -127,9 +130,7 @@ public class Treatment {
             for (int i = 0; i < skills.size(); i++) {
                 String info = skills.get(i).getSkill();
                 if (!info.split("\\.")[0].equals("1")) {
-                    skills.get(i).setSkill(info.split("\\.")[0]
-                            + "." + info.split("\\.")[1] + "." +
-                            0 + "." + info.split("\\.")[3]);
+                    skills.get(i).setNeedStep(0);
                 }
             }
             return skills;
@@ -141,10 +142,69 @@ public class Treatment {
             return enemy.getHp();
         }
 
-        public int secondAttack() {
-            int dmg = (int) (hero.getAtk() - enemy.getDef() * 0.7);
-            enemy.setHp(Math.max(enemy.getHp() - dmg, 0));
-            return enemy.getHp();
+        public int secondAttack(ArrayList<Skill> skills) {
+            int dmg;
+            int skillLevel = 1;
+            for (int i = 0; i < skills.size(); i++) {
+                Skill skill = hero.getSkills().get(i);
+                if (skill.getSkill().equals("2.skill_atk")) {
+                    if (skill.getLevel() == 2) {
+                        skillLevel = 2;
+                    }
+                    if (skill.getLevel() == 3) {
+                        skillLevel = 3;
+                    }
+                }
+            }
+            if (skillLevel == 1) {
+                dmg = (int) (hero.getAtk() - enemy.getDef() * 0.8);
+                enemy.setHp(Math.max(enemy.getHp() - dmg, 0));
+                return enemy.getHp();
+            } else if (skillLevel == 2) {
+                dmg = (int) (hero.getAtk() * 1.1 - enemy.getDef() * 0.7);
+                enemy.setHp(Math.max(enemy.getHp() - dmg, 0));
+                return enemy.getHp();
+            } else {
+                dmg = (int) (hero.getAtk() * 1.2  - enemy.getDef() * 0.6);
+                enemy.setHp(Math.max(enemy.getHp() - dmg, 0));
+                return enemy.getHp();
+            }
+        }
+
+        public int shadowAttack(ArrayList<Skill> skills, Enemy enemy) {
+            int dmg;
+            int skillLevel = 1;
+            for (int i = 0; i < skills.size(); i++) {
+                Skill skill = hero.getSkills().get(i);
+                if (skill.getSkill().equals("2.shadow_atk")) {
+                    if (skill.getLevel() == 2) {
+                        skillLevel = 2;
+                    }
+                    if (skill.getLevel() == 3) {
+                        skillLevel = 3;
+                    }
+                    if (skill.getLevel() == 4) {
+                        skillLevel = 4;
+                    }
+                }
+            }
+            if (skillLevel == 1) {
+                dmg = (int) (enemy.getHp() * 0.1 - enemy.getDef());
+                enemy.setHp(Math.max(enemy.getHp() - dmg, 0));
+                return enemy.getHp();
+            } else if (skillLevel == 2) {
+                dmg = (int) (enemy.getHp() * 0.15 - enemy.getDef() * 0.5);
+                enemy.setHp(Math.max(enemy.getHp() - dmg, 0));
+                return enemy.getHp();
+            } else if (skillLevel == 3) {
+                dmg = (int) (enemy.getHp() * 0.2 + hero.getAtk() * 0.25 - enemy.getDef() * 0.5);
+                enemy.setHp(Math.max(enemy.getHp() - dmg, 0));
+                return enemy.getHp();
+            } else {
+                dmg = (int) (enemy.getHp() * 0.25 + hero.getAtk() * 0.25);
+                enemy.setHp(Math.max(enemy.getHp() - dmg, 0));
+                return enemy.getHp();
+            }
         }
     }
 

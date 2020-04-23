@@ -133,6 +133,7 @@ public class Shop extends AppCompatActivity {
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.shop_back:
+                    shop_back.setEnabled(false);
                     Intent i = new Intent(Shop.this, Locate.class);
                     i.putExtra("hero_get", hero);
                     MainActivity.setLevel(MainActivity.getLevel() + 1);
@@ -140,6 +141,7 @@ public class Shop extends AppCompatActivity {
                     break;
 
                 case R.id.top_shop_button_1:
+                    top_shop_button_1.setEnabled(false);
                     int priceItem1 = Integer.parseInt(price_item_top_1.getText().toString());
                     if(hero.getMoney() >= priceItem1) {
                         hero.setMoney(hero.getMoney() - priceItem1);
@@ -156,6 +158,7 @@ public class Shop extends AppCompatActivity {
                     break;
 
                 case R.id.top_shop_button_2:
+                    top_shop_button_2.setEnabled(false);
                     int priceItem2 = Integer.parseInt(price_item_top_2.getText().toString());
                     if(hero.getMoney() >= priceItem2) {
                         hero.setMoney(hero.getMoney() - priceItem2);
@@ -172,6 +175,7 @@ public class Shop extends AppCompatActivity {
                     break;
 
                 case R.id.top_shop_button_3:
+                    top_shop_button_3.setEnabled(false);
                     int priceItem3 = Integer.parseInt(price_item_top_3.getText().toString());
                     if(hero.getMoney() >= priceItem3) {
                         hero.setMoney(hero.getMoney() - priceItem3);
@@ -188,6 +192,7 @@ public class Shop extends AppCompatActivity {
                     break;
 
                 case R.id.bottom_shop_button_1:
+                    bottom_shop_button_1.setEnabled(false);
                     int priceItem4 = Integer.parseInt(price_item_bottom_1.getText().toString());
                     if(hero.getMoney() >= priceItem4) {
                         hero.setMoney(hero.getMoney() - priceItem4);
@@ -204,6 +209,7 @@ public class Shop extends AppCompatActivity {
                     break;
 
                 case R.id.bottom_shop_button_2:
+                    bottom_shop_button_2.setEnabled(false);
                     int priceItem5 = Integer.parseInt(price_item_bottom_2.getText().toString());
                     if(hero.getMoney() >= priceItem5) {
                         hero.setMoney(hero.getMoney() - priceItem5);
@@ -220,6 +226,7 @@ public class Shop extends AppCompatActivity {
                     break;
 
                 case R.id.bottom_shop_button_3:
+                    bottom_shop_button_3.setEnabled(false);
                     int priceItem6 = Integer.parseInt(price_item_bottom_3.getText().toString());
                     if(hero.getMoney() >= priceItem6) {
                         hero.setMoney(hero.getMoney() - priceItem6);
