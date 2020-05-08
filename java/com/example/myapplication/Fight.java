@@ -167,6 +167,7 @@ public class Fight extends AppCompatActivity {
                             startActivity(i);
                             finish();
                         }
+                        skill.setEnabled(true);
                         break;
                     } else {
                         Toast.makeText(Fight.this, "Навык не готов", Toast.LENGTH_SHORT).show();
@@ -213,6 +214,7 @@ public class Fight extends AppCompatActivity {
                             startActivity(i);
                             finish();
                         }
+                        shadow_atk.setEnabled(true);
                         break;
                     } else {
                         Toast.makeText(Fight.this, "Навык не готов", Toast.LENGTH_SHORT).show();

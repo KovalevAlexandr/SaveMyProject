@@ -19,7 +19,7 @@ public class Treatment {
 
         while (true) {
             int needExp = 10;
-            for (int i = 0; i < hero.getLvl(); i++) {
+            for (int i = 0; i < hero.getLvl() - 1; i++) {
                 needExp += needExp * 0.3;
             }
             if (hero.getExp() >= needExp) {
@@ -131,6 +131,7 @@ public class Treatment {
                 String info = skills.get(i).getSkill();
                 if (!info.split("\\.")[0].equals("1")) {
                     skills.get(i).setNeedStep(0);
+                    skills.get(i).setFlag(true);
                 }
             }
             return skills;
