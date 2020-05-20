@@ -7,15 +7,18 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class ImproveHero extends AppCompatActivity {
+    View view;
 
-    Button back_improve_hero, improve_1, improve_2, improve_3, improve_button;
-    TextView improve_info, next_improve_info, level_improve_info, improve_this_skill, improve_next_skill;
+    Button improve_1, improve_2, improve_3, improve_button;
+    ImageButton back_improve_hero;
+    TextView improve_info, next_improve_info, info_improve_hero, improve_this_skill, improve_next_skill;
 
     Skill skill;
     String needSkill, improveSkill;
@@ -35,6 +38,22 @@ public class ImproveHero extends AppCompatActivity {
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
+        view = getWindow().getDecorView();
+
+        view.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int visibility) {
+                if (visibility == 0)
+                    view.setSystemUiVisibility(
+                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+                                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+            }
+        });
+
         hero = (Character) getIntent().getSerializableExtra("hero_get");
 
         generator = new Generator(MainActivity.getStage(), MainActivity.getLevel());
@@ -45,7 +64,7 @@ public class ImproveHero extends AppCompatActivity {
         improve_3 = findViewById(R.id.improve_3);
         improve_info = findViewById(R.id.improve_info);
         next_improve_info = findViewById(R.id.next_improve_info);
-        level_improve_info = findViewById(R.id.level_improve_info);
+        info_improve_hero = findViewById(R.id.info_improve_hero);
         improve_this_skill = findViewById(R.id.improve_this_skill);
         improve_next_skill = findViewById(R.id.improve_next_skill);
         improve_button = findViewById(R.id.improve_button);
@@ -59,13 +78,31 @@ public class ImproveHero extends AppCompatActivity {
         improve_3.setOnClickListener(bt);
     }
 
+
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus){
+            view.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        }
+    }
+
+
+
     private class ButtonTreatment implements View.OnClickListener {
 
         @Override
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.back_improve_hero:
-                    Intent intent = new Intent(ImproveHero.this, Locate.class);
+                    Intent intent = new Intent(ImproveHero.this, Locate_1.class);
                     intent.putExtra("hero_get", hero);
                     startActivity(intent);
                     finish();
@@ -167,40 +204,32 @@ public class ImproveHero extends AppCompatActivity {
                         }
                     }
                     if (skillLevel == 0) {
-                        improve_this_skill.setText(R.string.this_skill);
                         improve_info.setText(R.string.p);
-                        improve_next_skill.setText(R.string.next_skill);
                         next_improve_info.setText(R.string.phis_skill_1);
                         needSkill = null;
                         needHeroLevel = 1;
                         cost = 0;
                         skill = new Skill("1.phs_up", 0, 0, 1, true);
                     } else if (skillLevel == 1) {
-                        improve_this_skill.setText(R.string.this_skill);
                         improve_info.setText(R.string.phis_skill_1);
-                        improve_next_skill.setText(R.string.next_skill);
                         next_improve_info.setText(R.string.phis_skill_2);
                         needSkill = null;
                         needHeroLevel = 1;
                         cost = 0;
                         skill = new Skill("1.phs_up", 0, 0, 2, true);
                     } else if (skillLevel == 2) {
-                        improve_this_skill.setText(R.string.this_skill);
                         improve_info.setText(R.string.phis_skill_2);
-                        improve_next_skill.setText(R.string.next_skill);
                         next_improve_info.setText(R.string.phis_skill_3);
                         needSkill = null;
                         needHeroLevel = 1;
                         cost = 0;
                         skill = new Skill("1.phs_up", 0, 0, 3, true);
                     } else {
-                        improve_this_skill.setText(R.string.this_skill);
                         improve_info.setText(R.string.phis_skill_3);
-                        improve_next_skill.setText(R.string.next_skill);
                         next_improve_info.setText(R.string.p);
                         skill = new Skill("1.phs_up", 0, 0, 3, true);
                     }
-                    level_improve_info.setText(generator.skillLevel(skillLevel, maxSkillLevel));
+                    info_improve_hero.setText(generator.allForLevelUpSkill(skillLevel, maxSkillLevel, cost, needHeroLevel));
                     break;
 
                 case R.id.improve_2:
@@ -223,40 +252,32 @@ public class ImproveHero extends AppCompatActivity {
                         }
                     }
                     if (skillLevel == 0) {
-                        improve_this_skill.setText(R.string.this_skill);
                         improve_info.setText(R.string.p);
-                        improve_next_skill.setText(R.string.next_skill);
                         next_improve_info.setText(R.string.second_atk_skill_1);
                         needSkill = "1.phs_up";
                         skill = new Skill("2.skill_atk", 0, 2, 1, true);
                         needHeroLevel = 1;
                         cost = 0;
                     } else if (skillLevel == 1) {
-                        improve_this_skill.setText(R.string.this_skill);
                         improve_info.setText(R.string.second_atk_skill_1);
-                        improve_next_skill.setText(R.string.next_skill);
                         next_improve_info.setText(R.string.second_atk_skill_2);
                         needSkill = "1.phs_up";
                         skill = new Skill("2.skill_atk", 0, 2, 2, true);
                         needHeroLevel = 1;
                         cost = 0;
                     } else if (skillLevel == 2) {
-                        improve_this_skill.setText(R.string.this_skill);
                         improve_info.setText(R.string.second_atk_skill_2);
-                        improve_next_skill.setText(R.string.next_skill);
                         next_improve_info.setText(R.string.second_atk_skill_3);
                         needSkill = "1.phs_up";
                         skill = new Skill("2.skill_atk", 0, 2, 3, true);
                         needHeroLevel = 1;
                         cost = 0;
                     } else {
-                        improve_this_skill.setText(R.string.this_skill);
                         improve_info.setText(R.string.second_atk_skill_3);
-                        improve_next_skill.setText(R.string.next_skill);
                         next_improve_info.setText(R.string.p);
                         skill = new Skill("2.skill_atk", 0, 2, 3, true);
                     }
-                    level_improve_info.setText(generator.skillLevel(skillLevel, maxSkillLevel));
+                    info_improve_hero.setText(generator.allForLevelUpSkill(skillLevel, maxSkillLevel, cost, needHeroLevel));
                     break;
 
                 case R.id.improve_3:
@@ -282,49 +303,39 @@ public class ImproveHero extends AppCompatActivity {
                         }
                     }
                     if (skillLevel == 0) {
-                        improve_this_skill.setText(R.string.this_skill);
                         improve_info.setText(R.string.p);
-                        improve_next_skill.setText(R.string.next_skill);
                         next_improve_info.setText(R.string.shadow_atk_1);
                         needSkill = "1.phs_up";
                         needHeroLevel = 1;
                         cost = 0;
                         skill = new Skill("2.shadow_atk", 0, 3, 1, true);
                     } else if (skillLevel == 1) {
-                        improve_this_skill.setText(R.string.this_skill);
                         improve_info.setText(R.string.shadow_atk_1);
-                        improve_next_skill.setText(R.string.next_skill);
                         next_improve_info.setText(R.string.shadow_atk_2);
                         needSkill = "1.phs_up";
                         needHeroLevel = 1;
                         cost = 0;
                         skill = new Skill("2.shadow_atk", 0, 3, 2, true);
                     } else if (skillLevel == 2) {
-                        improve_this_skill.setText(R.string.this_skill);
                         improve_info.setText(R.string.shadow_atk_2);
-                        improve_next_skill.setText(R.string.next_skill);
                         next_improve_info.setText(R.string.shadow_atk_3);
                         needSkill = "1.phs_up";
                         needHeroLevel = 1;
                         cost = 0;
                         skill = new Skill("2.shadow_atk", 0, 3, 3, true);
                     } else if (skillLevel == 3) {
-                        improve_this_skill.setText(R.string.this_skill);
                         improve_info.setText(R.string.shadow_atk_3);
-                        improve_next_skill.setText(R.string.next_skill);
                         next_improve_info.setText(R.string.shadow_atk_4);
                         needSkill = "1.phs_up";
                         needHeroLevel = 1;
                         cost = 0;
                         skill = new Skill("2.shadow_atk", 0, 3, 4, true);
                     } else {
-                        improve_this_skill.setText(R.string.this_skill);
                         improve_info.setText(R.string.shadow_atk_4);
-                        improve_next_skill.setText(R.string.next_skill);
                         next_improve_info.setText(R.string.p);
                         skill = new Skill("2.shadow_atk", 0, 3, 4, true);
                     }
-                    level_improve_info.setText(generator.skillLevel(skillLevel, maxSkillLevel));
+                    info_improve_hero.setText(generator.allForLevelUpSkill(skillLevel, maxSkillLevel, cost, needHeroLevel));
                     break;
             }
         }

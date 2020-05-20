@@ -1,89 +1,237 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<?xml version="1.0" encoding="UTF-8"?>
+
+<LinearLayout
+    android:padding="1dp"
+    android:orientation="vertical"
+    android:layout_weight="1"
     android:layout_height="match_parent"
-    android:background="@color/gray">
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <LinearLayout
+
+    <LinearLayout android:orientation="horizontal"
+        android:layout_weight="1"
+        android:layout_height="0dp"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal">
+        android:layout_marginBottom="2dp">
 
-        <LinearLayout
-            android:layout_width="0dp"
+        <ImageButton
+            android:layout_weight="1"
             android:layout_height="match_parent"
-            android:layout_weight="8"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/improve_this_skill"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/improve_info"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2" />
-
-            <TextView
-                android:id="@+id/improve_next_skill"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/next_improve_info"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="2" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/level_improve_info"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
+            android:id="@+id/back_improve_hero"
+            android:layout_marginRight="2dp"
+            android:src="@drawable/backbtn"/>
 
-        <Button
-            android:id="@+id/improve_button"
-            android:layout_width="0dp"
+        <TextView android:layout_weight="17"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:text="Изучить"/>
+            android:layout_width="0dp"
+            android:text="УЛУЧШЕНИЕ ПЕРСОНАЖА"
+            android:gravity="center"
+            android:id="@+id/title_improve_hero"
+            android:textSize="23sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:background="@color/black"/>
+
     </LinearLayout>
 
-    <Button
-        android:id="@+id/improve_1"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="30dp"
-        android:background="@drawable/rounded" />
 
-    <Button
-        android:id="@+id/improve_2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
-        android:background="@drawable/rounded" />
+    <LinearLayout android:orientation="horizontal"
+        android:layout_weight="10"
+        android:layout_height="0dp"
+        android:layout_width="match_parent">
 
-    <Button
-        android:id="@+id/improve_3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="100dp"
-        android:background="@drawable/rounded" />
 
-    <Button
-        android:id="@+id/back_improve_hero"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/arrow_go" />
-</RelativeLayout>
+        <LinearLayout
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:background="@color/black">
+
+
+            <RelativeLayout
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:background="@color/black">
+
+                <Button android:layout_height="40sp"
+                    android:layout_width="40sp"
+                    android:id="@+id/improve_1"
+                    android:background="@drawable/rounded"
+                    android:layout_centerHorizontal="true"/>
+
+                <Button android:layout_height="40sp"
+                    android:layout_width="40sp"
+                    android:id="@+id/improve_2"
+                    android:layout_marginRight="20sp"
+                    android:background="@drawable/rounded"
+                    android:layout_below="@id/improve_1"
+                    android:layout_marginTop="20sp"
+                    android:layout_toLeftOf="@+id/improve_1"/>
+
+                <Button android:layout_height="40sp"
+                    android:layout_width="40sp"
+                    android:id="@+id/improve_3"
+                    android:background="@drawable/rounded"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/improve_1"
+                    android:layout_marginTop="20sp"/>
+
+                <Button android:layout_height="40sp"
+                    android:layout_width="40sp"
+                    android:id="@+id/improve_4"
+                    android:background="@drawable/rounded"
+                    android:layout_below="@id/improve_1"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="20sp"
+                    android:layout_toRightOf="@+id/improve_1"/>
+
+                <Button android:layout_height="40sp"
+                    android:layout_width="40sp"
+                    android:id="@+id/improve_5"
+                    android:layout_marginRight="20sp"
+                    android:background="@drawable/rounded"
+                    android:layout_below="@id/improve_3"
+                    android:layout_marginTop="20sp"
+                    android:layout_toLeftOf="@id/improve_6"/>
+
+                <Button android:layout_height="40sp"
+                    android:layout_width="40sp"
+                    android:id="@+id/improve_6"
+                    android:layout_marginRight="20sp"
+                    android:background="@drawable/rounded"
+                    android:layout_below="@id/improve_3"
+                    android:layout_marginTop="20sp"
+                    android:layout_toLeftOf="@+id/improve_1"/>
+
+                <Button android:layout_height="40sp"
+                    android:layout_width="40sp"
+                    android:id="@+id/improve_7"
+                    android:background="@drawable/rounded"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/improve_2"
+                    android:layout_marginTop="20sp"/>
+
+                <Button android:layout_height="40sp"
+                    android:layout_width="40sp"
+                    android:id="@+id/improve_8"
+                    android:background="@drawable/rounded"
+                    android:layout_below="@id/improve_3"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="20sp"
+                    android:layout_toRightOf="@+id/improve_1"/>
+
+                <Button android:layout_height="40sp"
+                    android:layout_width="40sp"
+                    android:id="@+id/improve_9"
+                    android:layout_marginRight="30sp"
+                    android:background="@drawable/rounded"
+                    android:layout_below="@id/improve_4"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="20sp"
+                    android:layout_toRightOf="@id/improve_8"/>
+
+                <Button android:layout_height="40sp"
+                    android:layout_width="40sp"
+                    android:id="@+id/improve_10"
+                    android:layout_marginRight="20sp"
+                    android:background="@drawable/rounded"
+                    android:layout_below="@id/improve_6"
+                    android:layout_marginTop="20sp"
+                    android:layout_toLeftOf="@id/improve_7"/>
+
+                <Button android:layout_height="40sp"
+                    android:layout_width="40sp"
+                    android:id="@+id/improve_11"
+                    android:background="@drawable/rounded"
+                    android:layout_below="@id/improve_7"
+                    android:layout_marginTop="20sp"
+                    android:layout_marginLeft="20sp"
+                    android:layout_toRightOf="@id/improve_7"/>
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout android:orientation="vertical"
+            android:layout_weight="0.8"
+            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:paddingLeft="2dp">
+
+            <TextView android:layout_weight="0.3"
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="2dp"
+                android:text="@string/this_skill"
+                android:gravity="center"
+                android:id="@+id/improve_this_skill"
+                android:textSize="14dp"
+                android:textColor="@color/white"
+                android:background="@color/black"/>
+
+            <TextView android:padding="1dp"
+                android:layout_weight="1"
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="2dp"
+                android:text="2ghkkkggkgb"
+                android:gravity="center"
+                android:id="@+id/improve_info"
+                android:textSize="14dp"
+                android:textColor="@color/white"
+                android:background="@color/black"/>
+
+            <TextView android:layout_weight="0.3"
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="2dp"
+                android:text="@string/next_skill"
+                android:gravity="center"
+                android:id="@+id/improve_next_skill"
+                android:textSize="14dp"
+                android:textColor="@color/white"
+                android:background="@color/black"/>
+
+            <TextView android:layout_weight="1"
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:text="lkjlfk;jh"
+                android:gravity="center"
+                android:id="@+id/next_improve_info"
+                android:textSize="14dp"
+                android:textColor="@color/white"
+                android:background="@color/black"/>
+
+            <TextView android:layout_weight="0.6"
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:layout_marginTop="2dp"
+                android:text="fhjkdgh"
+                android:gravity="center"
+                android:id="@+id/info_improve_hero"
+                android:textSize="14dp"
+                android:textColor="@color/white"
+                android:background="@color/black"/>
+
+
+            <LinearLayout android:layout_weight="0.55"
+                android:layout_height="0dp"
+                android:layout_width="match_parent"
+                android:background="@color/black">
+
+                <Button android:layout_height="56sp"
+                    android:layout_width="70sp"
+                    android:id="@+id/improve_button"
+                    android:background="@drawable/bag" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

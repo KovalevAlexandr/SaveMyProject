@@ -1,7 +1,6 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -14,6 +13,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class Shop extends AppCompatActivity {
+    View view;
+
 
     Button shop_back;
 
@@ -49,7 +50,29 @@ public class Shop extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop);
 
+
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+
+
+
+        view = getWindow().getDecorView();
+
+        view.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int visibility) {
+                if (visibility == 0)
+                    view.setSystemUiVisibility(
+                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                    | View.SYSTEM_UI_FLAG_FULLSCREEN
+                                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+            }
+        });
+
+
+
 
         hero = (Character) getIntent().getSerializableExtra("hero_get");
 
@@ -127,6 +150,23 @@ public class Shop extends AppCompatActivity {
 
     }
 
+
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        if (hasFocus){
+            view.setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                            | View.SYSTEM_UI_FLAG_FULLSCREEN
+                            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
+        }
+    }
+
+
     private class ButtonTreatment implements View.OnClickListener {
 
         @Override
@@ -134,16 +174,17 @@ public class Shop extends AppCompatActivity {
             switch (v.getId()) {
                 case R.id.shop_back:
                     shop_back.setEnabled(false);
-                    Intent i = new Intent(Shop.this, Locate.class);
+                    Intent i = new Intent(Shop.this, Locate_1.class);
                     i.putExtra("hero_get", hero);
                     MainActivity.setLevel(MainActivity.getLevel() + 1);
                     startActivity(i);
+                    finish();
                     break;
 
                 case R.id.top_shop_button_1:
-                    top_shop_button_1.setEnabled(false);
                     int priceItem1 = Integer.parseInt(price_item_top_1.getText().toString());
                     if(hero.getMoney() >= priceItem1) {
+                        top_shop_button_1.setEnabled(false);
                         hero.setMoney(hero.getMoney() - priceItem1);
                         shop_money.setText(String.valueOf(hero.getMoney()));
                         ArrayList<Item> hi = hero.getHeroItems();
@@ -158,9 +199,9 @@ public class Shop extends AppCompatActivity {
                     break;
 
                 case R.id.top_shop_button_2:
-                    top_shop_button_2.setEnabled(false);
                     int priceItem2 = Integer.parseInt(price_item_top_2.getText().toString());
                     if(hero.getMoney() >= priceItem2) {
+                        top_shop_button_2.setEnabled(false);
                         hero.setMoney(hero.getMoney() - priceItem2);
                         shop_money.setText(String.valueOf(hero.getMoney()));
                         ArrayList<Item> hi = hero.getHeroItems();
@@ -175,9 +216,9 @@ public class Shop extends AppCompatActivity {
                     break;
 
                 case R.id.top_shop_button_3:
-                    top_shop_button_3.setEnabled(false);
                     int priceItem3 = Integer.parseInt(price_item_top_3.getText().toString());
                     if(hero.getMoney() >= priceItem3) {
+                        top_shop_button_3.setEnabled(false);
                         hero.setMoney(hero.getMoney() - priceItem3);
                         shop_money.setText(String.valueOf(hero.getMoney()));
                         ArrayList<Item> hi = hero.getHeroItems();
@@ -192,9 +233,9 @@ public class Shop extends AppCompatActivity {
                     break;
 
                 case R.id.bottom_shop_button_1:
-                    bottom_shop_button_1.setEnabled(false);
                     int priceItem4 = Integer.parseInt(price_item_bottom_1.getText().toString());
                     if(hero.getMoney() >= priceItem4) {
+                        bottom_shop_button_1.setEnabled(false);
                         hero.setMoney(hero.getMoney() - priceItem4);
                         shop_money.setText(String.valueOf(hero.getMoney()));
                         ArrayList<Item> hi = hero.getHeroItems();
@@ -209,9 +250,9 @@ public class Shop extends AppCompatActivity {
                     break;
 
                 case R.id.bottom_shop_button_2:
-                    bottom_shop_button_2.setEnabled(false);
                     int priceItem5 = Integer.parseInt(price_item_bottom_2.getText().toString());
                     if(hero.getMoney() >= priceItem5) {
+                        bottom_shop_button_2.setEnabled(false);
                         hero.setMoney(hero.getMoney() - priceItem5);
                         shop_money.setText(String.valueOf(hero.getMoney()));
                         ArrayList<Item> hi = hero.getHeroItems();
@@ -226,9 +267,9 @@ public class Shop extends AppCompatActivity {
                     break;
 
                 case R.id.bottom_shop_button_3:
-                    bottom_shop_button_3.setEnabled(false);
                     int priceItem6 = Integer.parseInt(price_item_bottom_3.getText().toString());
                     if(hero.getMoney() >= priceItem6) {
+                        bottom_shop_button_3.setEnabled(false);
                         hero.setMoney(hero.getMoney() - priceItem6);
                         shop_money.setText(String.valueOf(hero.getMoney()));
                         ArrayList<Item> hi = hero.getHeroItems();

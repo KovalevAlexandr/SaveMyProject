@@ -9,6 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service
+            android:name=".MusicService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".Locate_3"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Locate_2"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".ImproveHero"
             android:screenOrientation="landscape" />
@@ -16,7 +27,7 @@
             android:name=".Shop"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".Locate"
+            android:name=".Locate_1"
             android:screenOrientation="landscape" />
         <activity
             android:name=".SelectCharacter"

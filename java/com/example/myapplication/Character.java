@@ -9,11 +9,13 @@ public class Character extends Unit implements Serializable {
     private int money;
     private int lvl;
     private int impPoint;
+    private int points;
     private ArrayList<Item> heroItems;
     private ArrayList<Skill> skills;
 
     public Character(int hp, int maxHp, int atk, int def, String name, int exp,
-                     int money, int lvl, int impPoint, ArrayList<Item> heroItems, ArrayList<Skill> skills) {
+                     int money, int lvl, int impPoint, ArrayList<Item> heroItems, ArrayList<Skill> skills,
+                     int points) {
         super(hp, maxHp, atk, def, name);
         this.exp = exp;
         this.money = money;
@@ -21,6 +23,7 @@ public class Character extends Unit implements Serializable {
         this.impPoint = impPoint;
         this.heroItems = heroItems;
         this.skills = skills;
+        this.points = points;
     }
 
     public int getExp() {
@@ -47,6 +50,10 @@ public class Character extends Unit implements Serializable {
         return skills;
     }
 
+    public int getPoints() {
+        return points;
+    }
+
     public void setExp(int exp) {
         this.exp = exp;
     }
@@ -69,6 +76,10 @@ public class Character extends Unit implements Serializable {
 
     public void setSkills(ArrayList<Skill> skills) {
         this.skills = skills;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 
     @Override

@@ -1,20 +1,29 @@
 package com.example.myapplication;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 public class Treatment {
+
     static public Character battleWin(Character hero, int stage, int level) {
 
-        if (level != 5) {
-            hero.setExp(hero.getExp() + 5 * stage + level);
+        if (level % 10 != 0) {
+            hero.setExp(hero.getExp() + (5 + level) * stage);
         } else {
-            hero.setExp(hero.getExp() + 10 * stage + level);
+            hero.setExp(hero.getExp() + (10 + level) * stage);
         }
 
-        if (level != 5) {
-            hero.setMoney(hero.getMoney() + 5);
+        if (level % 10 != 0) {
+            hero.setMoney(hero.getMoney() + 5 * stage);
         } else {
-            hero.setMoney(hero.getMoney() + 10);
+            hero.setMoney(hero.getMoney() + 10 * stage);
+        }
+
+        if (level % 10 != 0) {
+            hero.setPoints(hero.getPoints() + 5 * stage);
+        } else {
+            hero.setPoints(hero.getPoints() + 10 * stage);
         }
 
         while (true) {
@@ -39,7 +48,13 @@ public class Treatment {
             }
         }
 
-        MainActivity.setLevel(MainActivity.getLevel() + 1);
+        MainActivity.setLevel(level + 1);
+
+        if (MainActivity.getLevel() == 11 || MainActivity.getLevel() == 19 ||
+                MainActivity.getLevel() == 30) {
+            MainActivity.setStage(stage + 1);
+        }
+
         return hero;
     }
 
@@ -81,7 +96,29 @@ public class Treatment {
                 hero.setDef(hero.getDef() + heroItems.get(i).getDef());
                 hero.setMaxHp(hero.getMaxHp() + heroItems.get(i).getMaxHp());
             }
+
+            StringBuilder str = new StringBuilder();
+            for (int i = 0; i < hero.getHeroItems().size(); i++) {
+                if (i + 1 != hero.getHeroItems().size()) {
+                    str.append(hero.getHeroItems().get(i).getModif()).append(", ");
+                } else {
+                    str.append(hero.getHeroItems().get(i).getModif()).append(".");
+                }
+            }
+            Log.e("CheckHeroItems", String.valueOf(str));
+
             return hero;
+        }
+
+        public boolean skillLearned (String mod) {
+            boolean flag = false;
+            for (int i = 0; i < hero.getSkills().size(); i++) {
+                if (hero.getSkills().get(i).getSkill().split("\\.")[1].equals(mod)) {
+                    flag = true;
+                    break;
+                }
+            }
+            return flag;
         }
 
         public boolean skillIsReady(String mod) {
@@ -166,7 +203,7 @@ public class Treatment {
                 enemy.setHp(Math.max(enemy.getHp() - dmg, 0));
                 return enemy.getHp();
             } else {
-                dmg = (int) (hero.getAtk() * 1.2  - enemy.getDef() * 0.6);
+                dmg = (int) (hero.getAtk() * 1.2 - enemy.getDef() * 0.6);
                 enemy.setHp(Math.max(enemy.getHp() - dmg, 0));
                 return enemy.getHp();
             }
