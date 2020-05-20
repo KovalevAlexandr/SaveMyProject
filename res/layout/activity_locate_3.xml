@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/map3">
+
+
+    <Button
+        android:textColor="@color/TextWhite"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/rounded"
+        android:text="@string/f_19"
+        android:textSize="30sp"
+        android:id="@+id/level_19"/>
+
+
+    <Button
+        android:textColor="@color/TextWhite"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/rounded"
+        android:text="@string/f_20"
+        android:textSize="30sp"
+        android:id="@+id/level_20"/>
+
+
+    <Button
+        android:textColor="@color/TextWhite"
+        android:layout_marginLeft="270dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/rounded"
+        android:text="@string/f_21"
+        android:textSize="30sp"
+        android:id="@+id/level_21"/>
+
+
+    <Button
+        android:textColor="@color/TextWhite"
+        android:layout_marginLeft="400dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/rounded"
+        android:text="@string/f_22"
+        android:textSize="30sp"
+        android:id="@+id/level_22"/>
+
+
+    <Button
+        android:textColor="@color/TextWhite"
+        android:layout_marginLeft="140dp"
+        android:layout_marginTop="170dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/rounded"
+        android:text="@string/f_23"
+        android:textSize="30sp"
+        android:id="@+id/level_23"/>
+
+
+    <Button
+        android:textColor="@color/TextWhite"
+        android:layout_marginLeft="265dp"
+        android:layout_marginTop="170dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/rounded"
+        android:text="@string/f_24"
+        android:textSize="30sp"
+        android:id="@+id/level_24"/>
+
+
+
+    <Button
+        android:textColor="@color/TextWhite"
+        android:layout_marginLeft="400dp"
+        android:layout_marginTop="170dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/rounded"
+        android:text="@string/_25"
+        android:textSize="30sp"
+        android:id="@+id/level_25"/>
+
+
+    <Button
+        android:textColor="@color/TextWhite"
+        android:layout_marginLeft="525dp"
+        android:layout_marginTop="170dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/rounded"
+        android:text="@string/f_26"
+        android:textSize="30sp"
+        android:id="@+id/level_26"/>
+
+
+    <Button
+        android:textColor="@color/TextWhite"
+        android:layout_marginLeft="265dp"
+        android:layout_marginTop="320dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/rounded"
+        android:text="@string/f_27"
+        android:textSize="30sp"
+        android:id="@+id/level_27"/>
+
+
+    <Button
+        android:textColor="@color/TextWhite"
+        android:layout_marginLeft="395dp"
+        android:layout_marginTop="320dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/rounded"
+        android:text="@string/f_28"
+        android:textSize="30sp"
+        android:id="@+id/level_28"/>
+
+
+    <Button
+        android:textColor="@color/TextWhite"
+        android:layout_marginLeft="525dp"
+        android:layout_marginTop="320dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/rounded"
+        android:text="@string/f_29"
+        android:textSize="30sp"
+        android:id="@+id/level_29"/>
+
+
+    <Button
+        android:textColor="@color/TextWhite"
+        android:layout_marginLeft="655dp"
+        android:layout_marginTop="320dp"
+        android:layout_width="65dp"
+        android:layout_height="65dp"
+        android:background="@drawable/rounded"
+        android:text="@string/_30"
+        android:textSize="30sp"
+        android:id="@+id/level_30"/>
+
+
+    <Button
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:text="Л"
+        android:layout_alignParentRight="true"
+        android:id="@+id/go_improve_hero"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/f_sheild_skills"/>
+</RelativeLayout>
